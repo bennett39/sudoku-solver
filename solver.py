@@ -1,6 +1,5 @@
 def main():
     g = get_user_grid()
-    g.add_value(5, 3, 6)
     g.print_grid()
 
 
@@ -25,6 +24,7 @@ class Grid():
 
 def get_user_grid():
     g = Grid()
+    # TODO - Use get_user_input() to assign values in Grid
     return g
 
 def get_user_input(i, j):
