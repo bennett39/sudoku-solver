@@ -1,15 +1,24 @@
 def main():
     g = get_user_grid()
     for row in g:
-        print(row)
+       print(row)
+    
+    possible_values = create_grid()
+    print(possible_values)
 
-
-def get_user_grid():
+def create_grid():
     rows = []
     for i in range(9):
         rows.append([])
+    return rows
+
+
+def get_user_grid():
+    grid = create_grid()
+    print(grid)
+    for i in range(9):
         for j in range(9):
-            rows[i].append(get_user_input(i, j))
+            grid[i].append(get_user_input(i, j))
     return rows
 
 
@@ -25,6 +34,7 @@ def get_user_input(i, j):
         
     print("Invalid entry. Must be an integer 0-9.")
     get_user_input(i, j)
+
 
 if __name__ == "__main__":
     main()
