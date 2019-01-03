@@ -20,11 +20,10 @@ def get_user_input(i, j):
         number = int(entry)
         if number >= 0 and number <= 9:
             return number
-        else:
-            print("Must be an integer 0-9.")
     except ValueError:
-        print("Invalid entry. Must be an integer 0-9.")
-
+        print("That's not a number.")
+        
+    print("Invalid entry. Must be an integer 0-9.")
     get_user_input(i, j)
 
 if __name__ == "__main__":
