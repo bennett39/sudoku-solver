@@ -1,26 +1,31 @@
 def main():
     g = get_user_grid()
-    for row in g:
-       print(row)
+    g.add_value(5, 3, 6)
+    g.print_grid()
+
+
+class Grid():
+    def __init__(self):
+        self.rows = []
+        for i in range(9):
+            self.rows.append([])
+            for j in range(9):
+                self.rows[i].append(None)
     
-    possible_values = create_grid()
-    print(possible_values)
+    def print_grid(self):
+        for row in self.rows:
+            for value in row:
+                print(f"{value}\t", end='')
+            print()
 
-def create_grid():
-    rows = []
-    for i in range(9):
-        rows.append([])
-    return rows
-
+    def add_value(self, value, row, col):
+        print(f"{value} added at row {row}, column {col}")
+        self.rows[row-1][col-1] = value
+        
 
 def get_user_grid():
-    grid = create_grid()
-    print(grid)
-    for i in range(9):
-        for j in range(9):
-            grid[i].append(get_user_input(i, j))
-    return rows
-
+    g = Grid()
+    return g
 
 def get_user_input(i, j):
     entry = input(f"Row {i+1}, Col {j+1}: ")
