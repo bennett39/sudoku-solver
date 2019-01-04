@@ -24,21 +24,23 @@ class Grid():
 
 def get_user_grid():
     g = Grid()
+
     # TODO - Use get_user_input() to assign values in Grid
+    print(get_user_input())
     return g
 
-def get_user_input(i, j):
-    entry = input(f"Row {i+1}, Col {j+1}: ")
-
+def get_user_input():
     try:
-        number = int(entry)
-        if number >= 0 and number <= 9:
-            return number
+        row = int(input("Row: "))
+        col = int(input("Column: "))
+        val = int(input("Value: "))
+        if val >= 0 and val <= 9:
+            return {"row": row, "col": col, "num": val}
     except ValueError:
         print("That's not a number.")
         
     print("Invalid entry. Must be an integer 0-9.")
-    get_user_input(i, j)
+    get_user_input()
 
 
 if __name__ == "__main__":
