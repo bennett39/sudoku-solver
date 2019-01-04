@@ -24,18 +24,27 @@ class Grid():
 
 def get_user_grid():
     g = Grid()
+    more_values = True
 
-    # TODO - Use get_user_input() to assign values in Grid
-    print(get_user_input())
+    while more_values:
+        prompt = input("Do you have values to add to the grid (y/n)? ")
+        if prompt == 'n' or prompt == 'N':
+            more_values = False
+            break
+        else:
+            u = get_user_input()
+            g.add_value(u['val'], u['row'], u['col'])
+
     return g
+
 
 def get_user_input():
     try:
         row = int(input("Row: "))
         col = int(input("Column: "))
         val = int(input("Value: "))
-        if val >= 0 and val <= 9:
-            return {"row": row, "col": col, "num": val}
+        if val > 0 and val <= 9:
+            return {'row': row, 'col': col, 'val': val}
     except ValueError:
         print("That's not a number.")
         
