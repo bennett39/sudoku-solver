@@ -1,3 +1,5 @@
+# Class definition
+
 class Grid():
     def __init__(self):
         self.rows = []
@@ -11,15 +13,20 @@ class Grid():
             for value in row:
                 print(f"{value}\t", end='')
             print()
+        print("---")
 
     def add_value(self, value, row, col):
         self.rows[row-1][col-1] = value
         print(f"{value} added at row {row}, column {col}")
 
 
+# Functions
+
 def main():
     g = get_user_grid()
     g.print_grid()
+    possibles = Grid()
+    possibles.print_grid()
   
 
 def get_user_grid():
