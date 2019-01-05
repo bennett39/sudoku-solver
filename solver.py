@@ -19,15 +19,28 @@ class Grid():
         self.rows[row-1][col-1] = value
         print(f"{value} added at row {row}, column {col}")
 
+    def get_rows(self):
+        return self.rows
+
 
 # Functions
 
 def main():
     g = get_user_grid()
     g.print_grid()
-    possibles = Grid()
-    possibles.print_grid()
-  
+    p = get_possibilities(g)
+    p.print_grid()  
+
+def get_possibilities(g):
+    p = Grid()
+    rows = g.get_rows()
+
+    for row in range(len(rows)):
+        for col in range(len(rows[row])):
+            p.add_value(0, row, col)
+
+    return p
+
 
 def get_user_grid():
     g = Grid()
