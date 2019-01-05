@@ -1,8 +1,3 @@
-def main():
-    g = get_user_grid()
-    g.print_grid()
-
-
 class Grid():
     def __init__(self):
         self.rows = []
@@ -18,9 +13,14 @@ class Grid():
             print()
 
     def add_value(self, value, row, col):
-        print(f"{value} added at row {row}, column {col}")
         self.rows[row-1][col-1] = value
-        
+        print(f"{value} added at row {row}, column {col}")
+
+
+def main():
+    g = get_user_grid()
+    g.print_grid()
+  
 
 def get_user_grid():
     g = Grid()
