@@ -17,7 +17,7 @@ class Grid():
 
     def add_value(self, value, row, col):
         self.rows[row-1][col-1] = value
-        print(f"{value} added at row {row}, column {col}")
+        #  print(f"{value} added at row {row}, column {col}")
 
     def get_rows(self):
         return self.rows
@@ -31,13 +31,18 @@ def main():
     p = get_possibilities(g)
     p.print_grid()  
 
+
 def get_possibilities(g):
     p = Grid()
     rows = g.get_rows()
 
     for row in range(len(rows)):
         for col in range(len(rows[row])):
-            p.add_value(0, row, col)
+            curr_value = rows[row][col]
+            all_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            if curr_value in all_values: 
+                all_values.remove(curr_value)
+            p.add_value(all_values, row, col)
 
     return p
 
