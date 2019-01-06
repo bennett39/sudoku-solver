@@ -42,7 +42,7 @@ def get_possibilities(g):
             all_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             if curr_value in all_values: 
                 all_values.remove(curr_value)
-            p.add_value(all_values, row, col)
+            p.add_value(all_values, row+1, col+1)
 
     return p
 
