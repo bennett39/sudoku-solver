@@ -29,11 +29,11 @@ def main():
     g = get_user_grid()
     g.print_grid()
     p = Grid()
-    get_possibilities(g, p)
+    check_horizontal(g, p)
     p.print_grid()  
 
 
-def get_possibilities(g, p):
+def check_horizontal(g, p):
     rows = g.get_rows()
 
     for row in range(len(rows)):
