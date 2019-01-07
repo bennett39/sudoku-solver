@@ -28,12 +28,12 @@ class Grid():
 def main():
     g = get_user_grid()
     g.print_grid()
-    p = get_possibilities(g)
+    p = Grid()
+    get_possibilities(g, p)
     p.print_grid()  
 
 
-def get_possibilities(g):
-    p = Grid()
+def get_possibilities(g, p):
     rows = g.get_rows()
 
     for row in range(len(rows)):
@@ -43,8 +43,6 @@ def get_possibilities(g):
             if curr_value in all_values: 
                 all_values.remove(curr_value)
             p.add_value(all_values, row+1, col+1)
-
-    return p
 
 
 def get_user_grid():
