@@ -16,8 +16,7 @@ class Grid():
         print("---")
 
     def add_value(self, value, row, col):
-        self.rows[row-1][col-1] = value
-        #  print(f"{value} added at row {row}, column {col}")
+        self.rows[row-1][col-1] = value # TODO - Remove "-1", refactor
 
     def get_rows(self):
         return self.rows
@@ -26,26 +25,25 @@ class Grid():
 # Functions
 
 def main():
-    g = get_user_grid() # g for "grid", as in "user grid"
+    g = get_user_grid()
     g.print_grid()
 
-    p = Grid() # p as in "possible values"
-    check_horizontal(g, p)
+    p = possibilities_init()
+    #  check_horizontal(g, p)
     p.print_grid()
 
 
 def check_horizontal(g, p):
     rows = g.get_rows()
 
-    for row_i in range(len(rows)):
-        all_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        s = set(all_values).intersection(rows[row_i])
+    for i in range(len(rows)):
+        s = set(all_values).intersection(rows[i])
         
         for element in s:
             all_values.remove(element)
 
-        for col_j in range(len(rows[row_i])):
-            p.add_value(all_values, row_i+1, col_j+1)
+        for j in range(len(rows[i])):
+            p.add_value(all_values, i+1, j+1)
 
 
 def get_user_grid():
@@ -78,6 +76,18 @@ def get_user_input():
         
     print("Invalid entry. Must be an integer 0-9.")
     get_user_input()
+
+
+def possibilities_init():
+    p = Grid()
+    all_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    rows = p.get_rows()
+
+    for i in range(len(rows)):
+        for j in range(len(rows[i])):
+            p.add_value(all_values, i+1, j+1)
+
+    return p
 
 
 if __name__ == "__main__":
