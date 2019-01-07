@@ -26,23 +26,26 @@ class Grid():
 # Functions
 
 def main():
-    g = get_user_grid()
+    g = get_user_grid() # g for "grid", as in "user grid"
     g.print_grid()
-    p = Grid()
+
+    p = Grid() # p as in "possible values"
     check_horizontal(g, p)
-    p.print_grid()  
+    p.print_grid()
 
 
 def check_horizontal(g, p):
     rows = g.get_rows()
 
-    for row in range(len(rows)):
-        for col in range(len(rows[row])):
-            curr_value = rows[row][col]
-            all_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-            if curr_value in all_values: 
-                all_values.remove(curr_value)
-            p.add_value(all_values, row+1, col+1)
+    for row_i in range(len(rows)):
+        all_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        s = set(all_values).intersection(rows[row_i])
+        
+        for element in s:
+            all_values.remove(element)
+
+        for col_j in range(len(rows[row_i])):
+            p.add_value(all_values, row_i+1, col_j+1)
 
 
 def get_user_grid():
