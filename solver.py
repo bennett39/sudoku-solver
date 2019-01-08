@@ -51,13 +51,15 @@ def get_user_grid():
     while more_values:
         prompt = input("Do you have values to add to the grid (y/n)? ")
 
-        # TODO - Add more error checking for keyboard entries not n/N
         if prompt == 'n' or prompt == 'N':
             more_values = False
             break
-        else:
+        elif prompt == 'y' or prompt == 'Y':
             u = get_user_input()
             g.put_value(u['val'], u['row']-1, u['col']-1)
+        else:
+            print("Invalid input. Usage: 'y' or 'n'.")
+
 
     return g
 
