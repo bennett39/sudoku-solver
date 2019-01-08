@@ -26,11 +26,11 @@ class Grid():
 
 def main():
     g = get_user_grid()
-    g.print_grid()
+    #  g.print_grid()
 
     p = possibilities_init()
     check_horizontal(g, p)
-    p.print_grid()
+    #  p.print_grid()
 
 
 def check_horizontal(g, p):
@@ -42,7 +42,7 @@ def check_horizontal(g, p):
             for k in range(len(p_rows[i])):
                 if g_rows[i][j] in p_rows[i][k]:
                     p_rows[i][k].remove(g_rows[i][j])
-                    
+    print(p.get_rows())            
 
 def get_user_grid():
     g = Grid()
