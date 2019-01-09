@@ -9,7 +9,7 @@ class Node():
         self.up = None
         self.down = None
 
-        self.box = None
+        self.box = self.set_box()
 
     def put_value(self, val):
         self.val = val
@@ -26,11 +26,19 @@ class Node():
     def set_up(self, up):
         self.up = up
 
-    def set_box(self, box):
-        self.box = box
-
     def set_down(self, down):
         self.down = down
+
+    def set_box(self):
+        if self.row < 3 and self.col < 3: return 1
+        elif self.row < 3 and 3 <= self.col < 6: return 2
+        elif self.row < 3 and 6 <= self.col: return 3
+        elif 3 <= self.row < 6 and self.col < 3: return 4
+        elif 3 <= self.row < 6 and 3 <= self.col < 6: return 5
+        elif 3 <= self.row < 6 and 6 <= self.col: return 6
+        elif 6 <= self.row and self.col < 3: return 7
+        elif 6 <= self.row and 3 <= self.col < 6: return 8
+        elif 6 <= self.row and 6 <= self.col: return 9
 
 
 class Grid():
@@ -46,9 +54,8 @@ class Grid():
                 if j != 0:
                     self.nodes[k].set_left(self.nodes[k-1])
                     self.nodes[k-1].set_right(self.nodes[k])
-
-        for k in range(81):
-            self.nodes[k].set_neighbors()
+        for n in self.nodes:
+            n.set_neighbors()
 
     def print_grid(self):
         r = 0
