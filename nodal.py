@@ -8,10 +8,14 @@ class Node():
         self.left = None
         self.up = None
         self.down = None
+
         self.box = None
 
     def put_value(self, val):
         self.val = val
+
+    def set_neighbors(self):
+        self.neighbors = [self.up, self.right, self.down, self.left]
 
     def set_left(self, left):
         self.left = left
@@ -42,6 +46,9 @@ class Grid():
                 if j != 0:
                     self.nodes[k].set_left(self.nodes[k-1])
                     self.nodes[k-1].set_right(self.nodes[k])
+
+        for k in range(81):
+            self.nodes[k].set_neighbors()
 
     def print_grid(self):
         r = 0
