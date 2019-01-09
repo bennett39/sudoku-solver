@@ -2,6 +2,8 @@ class Node():
     def __init__(self, row, col):
         self.row = row
         self.col = col
+        self.val = None
+
         self.right = None
         self.left = None
         self.up = None
@@ -29,25 +31,24 @@ class Node():
 
 class Grid():
     def __init__(self):
+        self.nodes = []
         for i in range(9):
             for j in range(9):
-                pass
+                self.nodes.append(Node(i, j))
+
+    def print_nodes(self):
+        i = 0
+        for element in self.nodes:
+            if element.row != i:
+                print()
+                i = element.row
+            print(element.val, end="\t")
+        print()
 
 
 def main():
-    m = Node(1, 1)
-    m.put_value(8)
-
-    n = Node(2, 2)
-    n.put_value(9)
-
-    n.set_left(m)
-    m.set_right(n)
-
-    print(n.val)
-    print(n.left.val)
-    print(m.val)
-    print(m.right.val)
+    g = Grid()
+    g.print_nodes()
 
 
 if __name__ == "__main__":
