@@ -36,20 +36,28 @@ class Grid():
             for j in range(9):
                 self.nodes.append(Node(i, j))
 
-    def print_nodes(self):
-        i = 0
+                k = i * 9 + j
+                if i != 0:
+                    self.nodes[k].set_up(self.nodes[k-9])
+
+    def print_grid(self):
+        r = 0
         for element in self.nodes:
-            if element.row != i:
+            if element.row != r:
                 print()
-                i = element.row
+                r = element.row
             print(element.val, end="\t")
         print()
 
 
 def main():
     g = Grid()
-    g.print_nodes()
+    g.print_grid()
 
+    print(g.nodes[79].row)
+    print(g.nodes[79].col)
+    print(g.nodes[79].up.row)
+    print(g.nodes[79].up.col)
 
 if __name__ == "__main__":
     main()
