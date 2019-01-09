@@ -18,9 +18,6 @@ class Grid():
     def put_value(self, value, row, col):
         self.rows[row][col] = value 
 
-    def get_rows(self):
-        return self.rows
-
 
 # Functions
 
@@ -34,14 +31,11 @@ def main():
 
 
 def check_horizontal(g, p):
-    g_rows = g.get_rows()
-    p_rows = p.get_rows()
-    
-    for i in range(len(g_rows)):
-        for j in range(len(g_rows[i])):
-            for k in range(len(p_rows[i])):
-                if g_rows[i][j] in p_rows[i][k]:
-                    p_rows[i][k].remove(g_rows[i][j])
+    for i in range(len(g.rows)):
+        for j in range(len(g.rows[i])):
+            for k in range(len(p.rows[i])):
+                if g.rows[i][j] in p.rows[i][k]:
+                    p.rows[i][k].remove(g.rows[i][j])
 
 
 def get_user_grid():
@@ -80,10 +74,9 @@ def get_user_input():
 
 def possibilities_init():
     p = Grid()
-    rows = p.get_rows()
 
-    for i in range(len(rows)):
-        for j in range(len(rows[i])):
+    for i in range(len(p.rows)):
+        for j in range(len(p.rows[i])):
             # Cannot create the list as a variable bc they'll all be 
             # linked as references to that same variable.
             p.put_value([1, 2, 3, 4, 5, 6, 7, 8, 9], i, j)
