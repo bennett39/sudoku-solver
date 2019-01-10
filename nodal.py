@@ -60,6 +60,7 @@ class Grid():
 
         self.graph = {}
         for node in self.nodes:
+            #  TODO - Can I make the dictionary key a Node object?
             self.graph[node.id] = []
             for element in node.neighbors:
                 if element is not None:
