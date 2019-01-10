@@ -1,5 +1,6 @@
 class Node():
     def __init__(self, row, col):
+        self.id = row * 9 + col
         self.row = row
         self.col = col
         self.val = None
@@ -10,8 +11,8 @@ class Node():
         self.down = None
 
         self.box = self.set_box()
-
-    def put_value(self, val):
+    
+    def set_val(self, val):
         self.val = val
 
     def set_neighbors(self):
@@ -54,8 +55,15 @@ class Grid():
                 if j != 0:
                     self.nodes[k].set_left(self.nodes[k-1])
                     self.nodes[k-1].set_right(self.nodes[k])
-        for n in self.nodes:
-            n.set_neighbors()
+        for node in self.nodes:
+            node.set_neighbors()
+
+        self.graph = {}
+        for node in self.nodes:
+            self.graph[node.id] = []
+            for element in node.neighbors:
+                if element is not None:
+                    self.graph[node.id].append(element)
 
     def print_grid(self):
         r = 0
