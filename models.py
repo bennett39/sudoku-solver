@@ -74,12 +74,3 @@ class Grid():
                 r = element.row
             print(element.val, end="\t")
         print()
-
-
-def main():
-    g = Grid()
-    g.print_grid()
-
-
-if __name__ == "__main__":
-    main()
