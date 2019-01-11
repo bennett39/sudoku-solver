@@ -1,88 +1,50 @@
-# Class definition
-
-class Grid():
-    def __init__(self):
-        self.rows = []
-        for i in range(9):
-            self.rows.append([])
-            for j in range(9):
-                self.rows[i].append(None)
-    
-    def print_grid(self):
-        for row in self.rows:
-            for value in row:
-                print(f"{value}", end='\t')
-            print()
-        print("---")
-
-    def put_value(self, value, row, col):
-        self.rows[row][col] = value 
-
-
-# Functions
+from models import Node, Grid
 
 def main():
-    g = get_user_grid()
+    g = Grid()
+    get_user_grid(g)
     g.print_grid()
 
-    p = possibilities_init()
-    check_horizontal(g, p)
-    p.print_grid()
+    #  p = Grid()
+    #  p.print_grid()
 
 
-def check_horizontal(g, p):
-    for i in range(len(g.rows)):
-        for j in range(len(g.rows[i])):
-            for k in range(len(p.rows[i])):
-                if g.rows[i][j] in p.rows[i][k]:
-                    p.rows[i][k].remove(g.rows[i][j])
-
-
-def get_user_grid():
-    g = Grid()
+def get_user_grid(g):
     more_values = True
 
     while more_values:
         prompt = input("Do you have values to add to the grid (y/n)? ")
-
+        
         if prompt == 'n' or prompt == 'N':
             more_values = False
             break
         elif prompt == 'y' or prompt == 'Y':
             u = get_user_input()
-            g.put_value(u['val'], u['row']-1, u['col']-1)
+            g.nodes[u['id']].set_val(u['val'])
         else:
             print("Invalid input. Usage: 'y' or 'n'.")
 
 
-    return g
-
-
 def get_user_input():
     try:
-        row = int(input("Row: "))
-        col = int(input("Column: "))
+        row = int(input("Row: ")) - 1 # Row/col numbers start at 0
+        if not 0 <= row < 9:
+            print("Invalid row number. Must be 1-9.")
+        
+        col = int(input("Column: ")) - 1
+        if not 0 <= col < 9:
+            print("Invalid column number. Must be 1-9.")
+        
         val = int(input("Value: "))
-        if val > 0 and val <= 9:
-            return {'row': row, 'col': col, 'val': val}
+        if not 0 <= val < 9:
+            print("Invalid value. Must be 1-9.")
+        
+        if 0 <= row < 9 and 0 <= col < 9 and 0 <= val < 9:
+            return {'id': row * 9 + col, 'val': val}
     except ValueError:
         print("That's not a number.")
-        
-    print("Invalid entry. Must be an integer 0-9.")
     get_user_input()
 
-
-def possibilities_init():
-    p = Grid()
-
-    for i in range(len(p.rows)):
-        for j in range(len(p.rows[i])):
-            # Cannot create the list as a variable bc they'll all be 
-            # linked as references to that same variable.
-            p.put_value([1, 2, 3, 4, 5, 6, 7, 8, 9], i, j)
-
-    return p
-
-
+        
 if __name__ == "__main__":
     main()
