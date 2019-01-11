@@ -29,20 +29,22 @@ def get_user_input():
     try:
         row = int(input("Row: ")) - 1 # Row/col numbers start at 0
         if not 0 <= row < 9:
-            print("Invalid row number. Must be 1-9.")
-        
+            raise ValueError
+
         col = int(input("Column: ")) - 1
         if not 0 <= col < 9:
-            print("Invalid column number. Must be 1-9.")
-        
+            raise ValueError
+
         val = int(input("Value: "))
-        if not 0 <= val < 9:
-            print("Invalid value. Must be 1-9.")
-        
-        if 0 <= row < 9 and 0 <= col < 9 and 0 <= val < 9:
+        if not 0 < val <= 9:
+            raise ValueError
+
+        if 0 <= row < 9 and 0 <= col < 9 and 0 < val <= 9:
             return {'id': row * 9 + col, 'val': val}
+
     except ValueError:
-        print("That's not a number.")
+        print("That's not a valid entry. Must be 1-9.")
+    
     get_user_input()
 
         
