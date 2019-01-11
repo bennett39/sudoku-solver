@@ -4,9 +4,10 @@ def main():
     g = Grid()
     get_user_grid(g)
     g.print_grid()
-
-    #  p = Grid()
-    #  p.print_grid()
+    print()
+    g.print_grid('possible')
+    print()
+    g.print_grid('rowcol')
 
 
 def get_user_grid(g):
@@ -21,6 +22,7 @@ def get_user_grid(g):
         elif prompt == 'y' or prompt == 'Y':
             u = get_user_input()
             g.nodes[u['id']].set_val(u['val'])
+            g.nodes[u['id']].empty_possibles()
         else:
             print("Invalid input. Usage: 'y' or 'n'.")
 
@@ -47,6 +49,6 @@ def get_user_input():
     
     get_user_input()
 
-        
+
 if __name__ == "__main__":
     main()

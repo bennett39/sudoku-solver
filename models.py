@@ -3,7 +3,9 @@ class Node():
         self.id = row * 9 + col
         self.row = row
         self.col = col
+
         self.val = None
+        self.possibles = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
         self.right = None
         self.left = None
@@ -12,6 +14,13 @@ class Node():
 
         self.box = self.set_box()
     
+    def empty_possibles(self):
+        self.possibles = []
+
+    def rm_possible(self, rval):
+        try: self.possibles.remove(rval)
+        except: print(f"Unable to remove {rval} from {self.possibles}")
+
     def set_val(self, val):
         self.val = val
 
@@ -66,11 +75,14 @@ class Grid():
                 if element is not None:
                     self.graph[node.id].append(element)
 
-    def print_grid(self):
+    def print_grid(self, element=''):
         r = 0
-        for element in self.nodes:
-            if element.row != r:
+        for node in self.nodes:
+            if node.row != r:
                 print()
-                r = element.row
-            print(element.val, end="\t")
+                r = node.row
+            if element == 'possible':
+                print(node.possibles, end="\t")
+            else:
+                print(node.val, end="\t")
         print()
