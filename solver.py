@@ -8,7 +8,7 @@ def main():
     print()
     g.print_grid('possible')
 
-
+#  TODO - change to accept a text file instead
 def get_user_grid(g):
     more_values = True
 
