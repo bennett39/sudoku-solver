@@ -3,11 +3,10 @@ from models import Node, Grid
 def main():
     g = Grid()
     get_user_grid(g)
+
     g.print_grid()
     print()
     g.print_grid('possible')
-    print()
-    g.print_grid('rowcol')
 
 
 def get_user_grid(g):
@@ -23,6 +22,9 @@ def get_user_grid(g):
             u = get_user_input()
             g.nodes[u['id']].set_val(u['val'])
             g.nodes[u['id']].empty_possibles()
+            rm_horizontal(g, g.nodes[u['id']])
+            rm_vertical(g, g.nodes[u['id']])
+            rm_box(g, g.nodes[u['id']])
         else:
             print("Invalid input. Usage: 'y' or 'n'.")
 
@@ -48,6 +50,24 @@ def get_user_input():
         print("That's not a valid entry. Must be 1-9.")
     
     get_user_input()
+
+
+def rm_horizontal(grid, node):
+    for i in range(81):
+        if grid.nodes[i].row == node.row:
+            grid.nodes[i].rm_possible(node.val)
+
+
+def rm_vertical(grid, node):
+    for i in range(81):
+        if grid.nodes[i].col == node.col:
+            grid.nodes[i].rm_possible(node.val)
+
+
+def rm_box(grid, node):
+    for i in range(81):
+        if grid.nodes[i].box == node.box:
+            grid.nodes[i].rm_possible(node.val)
 
 
 if __name__ == "__main__":
