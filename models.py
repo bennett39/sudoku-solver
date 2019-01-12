@@ -19,7 +19,7 @@ class Node():
 
     def rm_possible(self, rval):
         try: self.possibles.remove(rval)
-        except: print(f"Unable to remove {rval} from {self.possibles}")
+        except Exception: pass # print(f"Unable to remove {rval} from {self.possibles}")
 
     def set_val(self, val):
         self.val = val
