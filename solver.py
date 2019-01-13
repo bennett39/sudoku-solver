@@ -4,9 +4,23 @@ def main():
     g = Grid()
     get_grid_from_file(g, "puzzles/p1.txt")
 
+    print("Input:")
     g.print_grid()
-    print()
-    g.print_grid('possible')
+
+    discover_vals(g)
+    print("---\nSolution:")
+    g.print_grid()
+
+
+def discover_vals(g):
+    more_vals = True
+    while more_vals:
+        more_vals = False
+        for node in g.nodes:
+            if len(node.possibles) == 1:
+                val = node.possibles[0]
+                set_grid_val(g, node, val)
+                more_vals = True
 
 
 def get_grid_from_file(g, source):
