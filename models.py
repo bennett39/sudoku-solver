@@ -7,11 +7,6 @@ class Node():
         self.val = None
         self.possibles = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-        self.right = None
-        self.left = None
-        self.up = None
-        self.down = None
-
         self.box = self.set_box()
     
     def empty_possibles(self):
@@ -26,18 +21,6 @@ class Node():
 
     def set_neighbors(self):
         self.neighbors = [self.up, self.right, self.down, self.left]
-
-    def set_left(self, left):
-        self.left = left
-
-    def set_right(self, right):
-        self.right = right
-
-    def set_up(self, up):
-        self.up = up
-
-    def set_down(self, down):
-        self.down = down
 
     def set_box(self):
         if self.row < 3 and self.col < 3: return 1
@@ -55,15 +38,7 @@ class Grid():
     def __init__(self):
         self.nodes = []
         for k in range(81):
-            i = k // 9
-            j = k % 9
             self.nodes.append(Node(k))
-            if i != 0:
-                self.nodes[k].set_up(self.nodes[k-9])
-                self.nodes[k-9].set_down(self.nodes[k])
-            if j != 0:
-                self.nodes[k].set_left(self.nodes[k-1])
-                self.nodes[k-1].set_right(self.nodes[k])
 
     def print_grid(self, element=''):
         r = 0
