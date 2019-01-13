@@ -1,8 +1,8 @@
 class Node():
-    def __init__(self, row, col):
-        self.id = row * 9 + col
-        self.row = row
-        self.col = col
+    def __init__(self, id):
+        self.id = id
+        self.row = id // 9
+        self.col = id % 9
 
         self.val = None
         self.possibles = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -19,7 +19,7 @@ class Node():
 
     def rm_possible(self, rval):
         try: self.possibles.remove(rval)
-        except Exception: pass # print(f"Unable to remove {rval} from {self.possibles}")
+        except Exception: pass
 
     def set_val(self, val):
         self.val = val
@@ -57,7 +57,7 @@ class Grid():
         for k in range(81):
             i = k // 9
             j = k % 9
-            self.nodes.append(Node(i, j))
+            self.nodes.append(Node(k))
             if i != 0:
                 self.nodes[k].set_up(self.nodes[k-9])
                 self.nodes[k-9].set_down(self.nodes[k])
