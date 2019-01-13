@@ -5,8 +5,8 @@ def main():
     get_grid_from_file(g, "puzzles/p1.txt")
 
     g.print_grid()
-    #  print()
-    #  g.print_grid('possible')
+    print()
+    g.print_grid('possible')
 
 
 def get_grid_from_file(g, source):
@@ -15,13 +15,8 @@ def get_grid_from_file(g, source):
         for line in f.readlines():
             clean_line = line.strip()
             for char in clean_line:
-                print(f"Char: #{id} = {char}")
                 if is_int(char):
-                    g.nodes[id].set_val(char)
-                    g.nodes[id].empty_possibles()
-                    rm_horizontal(g, g.nodes[id])
-                    rm_vertical(g, g.nodes[id])
-                    rm_box(g, g.nodes[id])
+                    set_grid_val(g, g.nodes[id], int(char))
                 id += 1
 
 
@@ -31,6 +26,14 @@ def is_int(a):
         return True
     except ValueError:
         return False
+
+
+def set_grid_val(grid, node, val):
+    node.set_val(val)
+    node.empty_possibles()
+    rm_horizontal(grid, node)
+    rm_vertical(grid, node)
+    rm_box(grid, node)
 
 
 def rm_horizontal(grid, node):
