@@ -2,54 +2,35 @@ from models import Node, Grid
 
 def main():
     g = Grid()
-    get_user_grid(g)
+    get_grid_from_file(g, "puzzles/p1.txt")
 
     g.print_grid()
-    print()
-    g.print_grid('possible')
-
-#  TODO - change to accept a text file instead
-def get_user_grid(g):
-    more_values = True
-
-    while more_values:
-        prompt = input("Do you have values to add to the grid (y/n)? ")
-        
-        if prompt == 'n' or prompt == 'N':
-            more_values = False
-            break
-        elif prompt == 'y' or prompt == 'Y':
-            u = get_user_input()
-            g.nodes[u['id']].set_val(u['val'])
-            g.nodes[u['id']].empty_possibles()
-            rm_horizontal(g, g.nodes[u['id']])
-            rm_vertical(g, g.nodes[u['id']])
-            rm_box(g, g.nodes[u['id']])
-        else:
-            print("Invalid input. Usage: 'y' or 'n'.")
+    #  print()
+    #  g.print_grid('possible')
 
 
-def get_user_input():
+def get_grid_from_file(g, source):
+    with open(source, mode='r') as f:
+        id = 0
+        for line in f.readlines():
+            clean_line = line.strip()
+            for char in clean_line:
+                print(f"Char: #{id} = {char}")
+                if is_int(char):
+                    g.nodes[id].set_val(char)
+                    g.nodes[id].empty_possibles()
+                    rm_horizontal(g, g.nodes[id])
+                    rm_vertical(g, g.nodes[id])
+                    rm_box(g, g.nodes[id])
+                id += 1
+
+
+def is_int(a):
     try:
-        row = int(input("Row: ")) - 1 # Row/col numbers start at 0
-        if not 0 <= row < 9:
-            raise ValueError
-
-        col = int(input("Column: ")) - 1
-        if not 0 <= col < 9:
-            raise ValueError
-
-        val = int(input("Value: "))
-        if not 0 < val <= 9:
-            raise ValueError
-
-        if 0 <= row < 9 and 0 <= col < 9 and 0 < val <= 9:
-            return {'id': row * 9 + col, 'val': val}
-
+        int(a)
+        return True
     except ValueError:
-        print("That's not a valid entry. Must be 1-9.")
-    
-    get_user_input()
+        return False
 
 
 def rm_horizontal(grid, node):
