@@ -54,26 +54,16 @@ class Node():
 class Grid():
     def __init__(self):
         self.nodes = []
-        for i in range(9):
-            for j in range(9):
-                self.nodes.append(Node(i, j))
-                k = i * 9 + j
-                if i != 0:
-                    self.nodes[k].set_up(self.nodes[k-9])
-                    self.nodes[k-9].set_down(self.nodes[k])
-                if j != 0:
-                    self.nodes[k].set_left(self.nodes[k-1])
-                    self.nodes[k-1].set_right(self.nodes[k])
-        for node in self.nodes:
-            node.set_neighbors()
-
-        self.graph = {}
-        for node in self.nodes:
-            #  TODO - Can I make the dictionary key a Node object?
-            self.graph[node.id] = []
-            for element in node.neighbors:
-                if element is not None:
-                    self.graph[node.id].append(element)
+        for k in range(81):
+            i = k // 9
+            j = k % 9
+            self.nodes.append(Node(i, j))
+            if i != 0:
+                self.nodes[k].set_up(self.nodes[k-9])
+                self.nodes[k-9].set_down(self.nodes[k])
+            if j != 0:
+                self.nodes[k].set_left(self.nodes[k-1])
+                self.nodes[k-1].set_right(self.nodes[k])
 
     def print_grid(self, element=''):
         r = 0
