@@ -1,2 +1,2 @@
 # sudoku-solver
-Uses graph theory to solve Sudokus
+Takes a sudoku as a txt file and prints solution.
