@@ -19,9 +19,6 @@ class Node():
     def set_val(self, val):
         self.val = val
 
-    def set_neighbors(self):
-        self.neighbors = [self.up, self.right, self.down, self.left]
-
     def set_box(self):
         if self.row < 3 and self.col < 3: return 1
         elif self.row < 3 and 3 <= self.col < 6: return 2
